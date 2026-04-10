@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;700;900&display=swap" rel="stylesheet">
 
   <!-- Estilos do projeto (separados) -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body class="overflow-hidden">
@@ -101,26 +101,10 @@
             </div>
           </div>
 
-          <!-- Card de diagnóstico do sistema -->
-          <div class="lg:col-span-4 mt-8 lg:mt-0 w-full">
-            <div class="hw-card p-5 border-l-4 border-l-purple-600 bg-black/60 backdrop-blur-sm">
-              <div class="flex justify-between items-center mono border-b border-white/5 pb-2 mb-4" style="font-size:var(--fs-label)">
-                <span class="text-gray-600">> LOG_SISTEMA</span>
-                <span class="text-gray-600">JCDEV_OS</span>
-              </div>
-              <div class="space-y-3">
-                <div class="flex justify-between text-sm">
-                  <span class="text-white font-bold uppercase">Utilização_CPU</span>
-                  <span class="text-purple-400 core-load">92%</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                  <span class="text-white font-bold uppercase">Temp_CPU</span>
-                  <span class="text-red-400 temp-core">38°C</span>
-                </div>
-              </div>
-            </div>
+          <!-- Imagem decorativa lateral (só em telas grandes) -->
+          <div class="lg:col-span-4 relative group hidden lg:block">
+            <img src="./img/gitfoto.png" alt="Decoração de código binário" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
           </div>
-
         </div>
       </div>
     </section>
@@ -135,7 +119,7 @@
           <!-- Foto -->
           <div class="lg:col-span-5 relative group order-2 lg:order-1">
             <div class="hw-card p-1 relative overflow-hidden mx-auto max-w-[320px] sm:max-w-sm lg:max-w-none">
-              <img src="./assets/img/foto.png" alt="Jean Costa — Analista de Sistemas" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+              <img src="./img/foto.png" alt="Jean Costa — Analista de Sistemas" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
               <div class="absolute top-2 right-2 flex flex-col gap-1">
                 <span class="tech-badge bg-green-900/40 text-green-400">STATUS: ACTIVE</span>
               </div>
@@ -182,7 +166,7 @@
           <!-- Projetos -->
           <div class="lg:col-span-8 group hw-card p-1 overflow-hidden relative min-h-[260px] sm:min-h-[360px] md:min-h-[450px]">
             <img
-              src="./assets/img/projeto-acari.png"
+              src="./img/projeto-acari.png"
               alt="Projeto Instituto Acari"
               class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
             >
@@ -205,7 +189,7 @@
 
           <div class="lg:col-span-8 group hw-card p-1 overflow-hidden relative min-h-[260px] sm:min-h-[360px] md:min-h-[450px]">
             <img
-              src="./assets/img/projeto-hello-cloe.png"
+              src="./img/projeto-hello-cloe.png"
               alt="Projeto Hello Cloe"
               class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
             >
@@ -228,7 +212,7 @@
 
           <div class="lg:col-span-8 group hw-card p-1 overflow-hidden relative min-h-[260px] sm:min-h-[360px] md:min-h-[450px]">
             <img
-              src="./assets/img/projeto-vidracaria.png"
+              src="./img/projeto-vidracaria.png"
               alt="Projeto Vidracaria Elisabeth"
               class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
             >
@@ -251,7 +235,7 @@
 
           <div class="lg:col-span-8 group hw-card p-1 overflow-hidden relative min-h-[260px] sm:min-h-[360px] md:min-h-[450px]">
             <img
-              src="./assets/img/projeto-oficina.png"
+              src="./img/projeto-oficina.png"
               alt="Projeto Oficina GTR"
               class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
             >
@@ -610,6 +594,6 @@
 
     </footer>
 
-  <script src="./assets/js/script.js" defer></script>
+  <script src="./js/script.js" defer></script>
 </body>
 </html>
