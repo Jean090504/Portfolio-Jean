@@ -1,0 +1,319 @@
+/* ============================================================
+   JEAN COSTA // SYSTEMS_ANALYST v2.0
+   style.css — Módulo de Estilos Principal
+   ============================================================ */
+
+/* --- TOKENS & VARIÁVEIS GLOBAIS --- */
+:root {
+  --neon: #a855f7;
+  --neon-dim: rgba(168, 85, 247, 0.3);
+  --dark: #050505;
+  --hw-border: #222;
+
+  /* Tipografia fluida: escala do menor ecrã ao maior */
+  --fs-h1: clamp(2.5rem, 10vw, 12rem);
+  --fs-h2: clamp(2rem, 5vw, 5rem);
+  --fs-h3: clamp(1.25rem, 3vw, 2.25rem);
+  --fs-body: clamp(0.8rem, 1.5vw, 1rem);
+  --fs-mono: clamp(0.65rem, 1.2vw, 0.875rem);
+  --fs-label: clamp(0.55rem, 0.9vw, 0.7rem);
+
+  /* Espaçamento fluido */
+  --sp-section: clamp(3rem, 8vw, 8rem);
+  --sp-container: clamp(1rem, 4vw, 2rem);
+}
+
+/* --- RESET & BASE --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* base para rem */
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: var(--fs-body);
+  background-color: var(--dark);
+  color: white;
+  cursor: none !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Esconde cursor em todos os interativos */
+a, button, input, textarea, select, label { cursor: none !important; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* --- UTILIDADES --- */
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ============================================================
+   MÓDULO 1 // LOADER (BOOT SEQUENCE)
+   ============================================================ */
+#loader {
+  transition: opacity 0.7s ease-in-out;
+}
+
+#loader .mono { font-size: var(--fs-mono); }
+
+/* ============================================================
+   MÓDULO 2 // CURSOR CYBER CUSTOMIZADO
+   ============================================================ */
+#custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neon);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5), inset 0 0 5px rgba(168, 85, 247, 0.3);
+}
+
+#custom-cursor::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: var(--neon);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s ease;
+}
+
+.cursor-hover-state {
+  width: 40px !important;
+  height: 40px !important;
+  border-color: #fff !important;
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.cursor-hover-state::after { background-color: #fff !important; }
+
+/* Em touch screens, esconde o cursor customizado */
+@media (hover: none) and (pointer: coarse) {
+  #custom-cursor { display: none; }
+  body, a, button, input, textarea { cursor: auto !important; }
+}
+
+/* ============================================================
+   MÓDULO 3 // CANVAS (MATRIX & PARTICLES)
+   ============================================================ */
+#matrix-canvas,
+#hero-particles {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none;
+}
+
+#matrix-canvas { opacity: 0.05; z-index: -2; }
+#hero-particles { opacity: 0.15; z-index: -1; }
+
+/* ============================================================
+   MÓDULO 4 // SCANLINE
+   ============================================================ */
+.scanline {
+  width: 100%;
+  height: 2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 2px, 3px 100%;
+  animation: scan 6s linear infinite;
+}
+
+@keyframes scan {
+  0%   { top: -10%; }
+  100% { top: 110%; }
+}
+
+/* ============================================================
+   MÓDULO 5 // COMPONENTES UI
+   ============================================================ */
+
+/* HW-CARD */
+.hw-card {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  border: 1px solid var(--hw-border);
+  background: rgba(10, 10, 10, 0.9);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(5px);
+}
+
+.hw-card:hover {
+  border-color: var(--neon);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+}
+
+/* TECH-BADGE */
+.tech-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   MÓDULO 6 // GLITCH TEXT
+   ============================================================ */
+.glitch-text-container {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+}
+
+.glitch-text-container:hover::before,
+.glitch-text-container:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+}
+
+.glitch-text-container:hover::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text-container:hover::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+  animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0%   { clip: rect(10px, 9999px, 85px, 0); transform: skew(0.5deg); }
+  20%  { clip: rect(60px, 9999px, 45px, 0); transform: skew(0.1deg); }
+  40%  { clip: rect(15px, 9999px, 95px, 0); transform: skew(0.8deg); }
+  60%  { clip: rect(80px, 9999px, 30px, 0); transform: skew(0.2deg); }
+  80%  { clip: rect(25px, 9999px, 60px, 0); transform: skew(0.9deg); }
+  100% { clip: rect(35px, 9999px, 75px, 0); transform: skew(0.4deg); }
+}
+
+@keyframes glitch-anim2 {
+  0%   { clip: rect(2px,  9999px, 60px, 0); }
+  100% { clip: rect(75px, 9999px, 30px, 0); }
+}
+
+/* ============================================================
+   MÓDULO 7 // TYPING CURSOR
+   ============================================================ */
+[id^="type-"]::after {
+  content: "|";
+  margin-left: 2px;
+  color: var(--neon);
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ============================================================
+   MÓDULO 8 // HERO SECTION — TIPOGRAFIA FLUIDA
+   ============================================================ */
+.hero-title {
+  font-size: var(--fs-h1);
+  line-height: 0.85;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   MÓDULO 9 // LAYOUT & CONTAINERS RESPONSIVOS
+   ============================================================ */
+.section-pad { padding-top: var(--sp-section); padding-bottom: var(--sp-section); }
+
+/* Container global respeitando telas pequenas e grandes */
+.container-fluid {
+  width: 100%;
+  max-width: min(1600px, 95vw);
+  margin-inline: auto;
+  padding-inline: var(--sp-container);
+}
+
+/* ============================================================
+   MÓDULO 10 // RESPONSIVIDADE AVANÇADA
+   ============================================================ */
+
+/* Telas muito pequenas: < 360px (relógio, Android Go) */
+@media (max-width: 359px) {
+  :root { --sp-container: 0.75rem; }
+  .hero-title { font-size: clamp(2rem, 14vw, 3rem); }
+  .tech-badge { font-size: 0.5rem; padding: 2px 5px; }
+  .hw-card { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+}
+
+/* Mobile: 360px – 767px */
+@media (max-width: 767px) {
+  .hw-card:hover { transform: translateY(-2px); } /* Hover menos agressivo no touch */
+  .footer-links { flex-direction: column; align-items: stretch; }
+  .footer-links a { justify-content: center; }
+}
+
+/* Tablet: 768px – 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root { --fs-h1: clamp(4rem, 9vw, 7rem); }
+}
+
+/* TV / Ultra-wide: > 1800px */
+@media (min-width: 1800px) {
+  :root {
+    --fs-h1: clamp(8rem, 8vw, 14rem);
+    --fs-h2: clamp(4rem, 4.5vw, 7rem);
+    --fs-body: clamp(1rem, 1.2vw, 1.3rem);
+    --fs-mono: clamp(0.85rem, 0.9vw, 1rem);
+    --sp-section: clamp(8rem, 10vw, 14rem);
+  }
+}
+
+/* Força o h2 a usar token fluido quando não há classe Tailwind */
+h2.section-title { font-size: var(--fs-h2); }
+
+/* ============================================================
+   MÓDULO 11 // ACESSIBILIDADE — REDUCE MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .scanline { animation: none; opacity: 0; }
+  .glitch-text-container:hover::before,
+  .glitch-text-container:hover::after { animation: none; }
+  [id^="type-"]::after { animation: none; }
+  .hw-card { transition: none; }
+  .hw-card:hover { transform: none; }
+}
